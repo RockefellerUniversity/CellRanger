@@ -1,11 +1,12 @@
 ---
-title: "My Course Template, Session 1 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=796px></html>"
-author: "Rockefeller University, Bioinformatics Resource Centre"
-date: "http://rockefelleruniversity.github.io/RU_course_template/"
+title: "Cell Ranger"
+subtitle: "Bioinformatics Resource Center - Rockefeller University"
+author: 
+  - "http://rockefelleruniversity.github.io/Intro_To_R_1Day/"
+  - "brc@rockefeller.edu"
 output: 
   xaringan::moon_reader:
-    css: ["default", "metropolisCustom.css", "metropolis-fontsCustom.css"]
-    lib_dir: libs
+    css: xaringan-themer.css
     nature:
       highlightStyle: github
       highlightLines: true
@@ -26,9 +27,19 @@ suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
 ```
 
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#23373B",
+  header_font_google = google_font("Montserrat"),
+  text_font_google   = google_font("Fira Sans", "300", "300i"),
+  code_font_google   = google_font("Fira Code")
+)
+```
+
 ```{r, results='asis',include=TRUE,echo=FALSE}
 if(params$isSlides != "yes"){
-  cat("# ???My Course name (session1)???
+  cat("# Cell Ranger
 
 ---
 "    
@@ -42,6 +53,7 @@ if(params$isSlides != "yes"){
 
 ??We often put an overview slide that links to the various parts of the course content to make it easy to navigate i.e. this one for intro to r??
 
+- [Course Home Page](http://rockefelleruniversity.github.io/Intro_To_R_1Day/)
 - [Set up](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#set-up)
 - [Background to R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#background-to-r)
 - [Data types in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#data_types_in_r)
@@ -102,31 +114,12 @@ Practicals as HTML pages.
 * **r_course/answers/**
 Practicals with answers as HTML pages and R code solutions. 
 
-
----
-## Set the Working directory
-
-
-Before running any of the code in the practicals or slides we need to set the working directory to the folder we unarchived. 
-
-You may navigate to the unarchived RU_Course_help folder in the Rstudio menu.
-
-**Session -> Set Working Directory -> Choose Directory**
-
-or in the console.
-
-```{r setwd_introtoR,eval=F} 
-setwd("/PathToMyDownload/RU_Course_template/r_course")
-# e.g. setwd("~/Downloads/Intro_To_R_1Day/r_course")
-```
-
-
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Another section header
+# Cell Ranger
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
