@@ -150,7 +150,7 @@ jobs:
         name: Find Bioc and R versions
         run: |
           ## Find what branch we are working on
-          if echo "$GITHUB_REF" | grep -q "master"; then
+          if echo "$GITHUB_REF" | grep -q "main"; then
               biocversion="devel"
           elif echo "$GITHUB_REF" | grep -q "RELEASE_"; then
               biocversion="release"
