@@ -6,9 +6,19 @@ suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----xaringan-themer, include=FALSE, warning=FALSE----------------------------
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#23373B",
+  header_font_google = google_font("Montserrat"),
+  text_font_google   = google_font("Fira Sans", "300", "300i"),
+  code_font_google   = google_font("Fira Code")
+)
+
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides != "yes"){
-  cat("# ???My Course name (session1)???
+  cat("# Cell Ranger
 
 ---
 "    
@@ -18,7 +28,7 @@ if(params$isSlides != "yes"){
 
 
 
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
@@ -40,16 +50,11 @@ if(params$isSlides == "yes"){
 
 
 
-## ----setwd_introtoR,eval=F----------------------------------------------------
-## setwd("/PathToMyDownload/RU_Course_template/r_course")
-## # e.g. setwd("~/Downloads/Intro_To_R_1Day/r_course")
-
-
-## ---- results='asis',include=TRUE,echo=FALSE----------------------------------
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Another section header
+# Cell Ranger
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -57,7 +62,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Another section header
+  cat("# Cell Ranger
 
 ---
 "    
@@ -67,18 +72,105 @@ if(params$isSlides == "yes"){
 
 
 
-## ----echo=T-------------------------------------------------------------------
-Table <- read.table("data/readThisTable.csv",sep=",",header=T)
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Cell Ranger
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Cell Ranger
+
+---
+"    
+  )
+  
+}
 
 
 
-## ----echo=T, eval=F-----------------------------------------------------------
-## #Intense computation
-## myresult<-10^6 +1
-## 
+## wget -O cellranger-7.2.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-7.2.0.tar.gz?Expires=1701688001&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=Puwpsqsf~wMQz5e~PwTvM2DRQO1XdJ~9zeLCWqX6tVbOx~dnf24hP1bwlmNhybr3SZUQ8C12ywcICMH6Au02wxiCRm1uuTxZ0Uvq8g~s8L8s6XFyhepdi6Qjq8dzXNGoxswg3hModjKWVptTWq-MTHBDZv~yTFB7QAM9lzHHXo6SPWg8Fnx30ngmtGC5tDReVOiJ3DY0hsFvZtG3HaQ-HEbnzEH3lre-0rpWMBlsQu-vZ4RnKE0o3Xv6pQsb6261M19nHcpCsGhDCkFjDDbradx~SNw5rpY-HMxM4SnRuaOOI0rYyDNn7xdTat3eFj7rlgATXRaYx7SYNqDYKSrNWw__"
+
+## wget -O https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2020-A.tar.gz
+
+## tar -xzvf cellranger-7.2.0.tar.gz
+## tar -xzvf refdata-gex-GRCh38-2020-A.tar.gz
+
+## export PATH=/PATH_TO_CELLRANGER_DIRECTORY/cellranger-7.1.0:$PATH
+
+## cellranger count --id=my_run_name \
+##    --fastqs=PATH_TO_FASTQ_DIRECTORY \
+##    --transcriptome=/PATH_TO_CELLRANGER_DIRECTORY/refdata-gex-GRCh38-2020-A
+
+## cellranger mkgtf Homo_sapiens.GRCh38.ensembl.gtf \
+## Homo_sapiens.GRCh38.ensembl.filtered.gtf \
+##                    --attribute=gene_biotype:protein_coding \
+##                    --attribute=gene_biotype:lncRNA \
+##                    --attribute=gene_biotype:antisense \
+##                    --attribute=gene_biotype:IG_LV_gene \
+##                    --attribute=gene_biotype:IG_V_gene \
+##                    --attribute=gene_biotype:IG_V_pseudogene \
+##                    --attribute=gene_biotype:IG_D_gene \
+##                    --attribute=gene_biotype:IG_J_gene \
+##                    --attribute=gene_biotype:IG_J_pseudogene \
+##                    --attribute=gene_biotype:IG_C_gene \
+##                    --attribute=gene_biotype:IG_C_pseudogene \
+##                    --attribute=gene_biotype:TR_V_gene \
+##                    --attribute=gene_biotype:TR_V_pseudogene \
+##                    --attribute=gene_biotype:TR_D_gene \
+##                    --attribute=gene_biotype:TR_J_gene \
+##                    --attribute=gene_biotype:TR_J_pseudogene \
+##                    --attribute=gene_biotype:TR_C_gene
+
+## cellranger mkref --genome=custom_reference \
+## --fasta=custom_reference.fa  \
+## --genes=custom_reference_filtered.gtf
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Cell Ranger -  Output files
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Cell Ranger - Output files
+
+---
+"    
+  )
+  
+}
 
 
-## ----echo=F, eval=T-----------------------------------------------------------
-load("data/myresult.RData")
+
+## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
+if(params$isSlides == "yes"){
+  cat("class: inverse, center, middle
+
+# Cell Ranger - Web Summary QC
+
+<html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
+
+---
+"    
+  )
+}else{
+  cat("# Cell Ranger - Web Summary QC
+
+---
+"    
+  )
+  
+}
 
 
