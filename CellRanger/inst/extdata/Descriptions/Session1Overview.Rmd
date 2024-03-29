@@ -1,9 +1,8 @@
 <br>
 
-#### **?? My course name?? , Session 1**
+#### **Cell Ranger**
 
-??What am I focusing on in this section. Bullet point lists are good??
+This course covers:
 
-* Course content
-* Building courses
-* Making it look nice
+* Running Cell Ranger
+* Interpreting Cell Ranger outputs with a focus on QC
