@@ -94,9 +94,9 @@ if(params$isSlides == "yes"){
 
 
 
-## wget -O cellranger-7.2.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-7.2.0.tar.gz?Expires=1701688001&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=Puwpsqsf~wMQz5e~PwTvM2DRQO1XdJ~9zeLCWqX6tVbOx~dnf24hP1bwlmNhybr3SZUQ8C12ywcICMH6Au02wxiCRm1uuTxZ0Uvq8g~s8L8s6XFyhepdi6Qjq8dzXNGoxswg3hModjKWVptTWq-MTHBDZv~yTFB7QAM9lzHHXo6SPWg8Fnx30ngmtGC5tDReVOiJ3DY0hsFvZtG3HaQ-HEbnzEH3lre-0rpWMBlsQu-vZ4RnKE0o3Xv6pQsb6261M19nHcpCsGhDCkFjDDbradx~SNw5rpY-HMxM4SnRuaOOI0rYyDNn7xdTat3eFj7rlgATXRaYx7SYNqDYKSrNWw__"
+## wget -O cellranger-8.0.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-8.0.0.tar.gz?Expires=1711772964&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=muvzcbqxba6d-blyYS02MVfLlzwZk6iZNQWXdaoCLnl7owW2nEN-IHwSPwdNoYl-6Xia7rr0S1sLCUQTsekGm2pQKcd0kqK~ndHK0DM7SwSVpXLlRvBV5pXt~EIlsxATVBKVeQLnUy698N-WnRlT~ahjlU-nMdpomX9-lOkF~w8gbgHBdtPXunTWfW87sSJLpHMDVENSF7TFJsXERDwDnsXyQLCuEhfGTCOnupkaATlLEr9kaeCStePKkwGyqgi1m8Ua02NNGHWPIJ6I1mDt695wo~dgptpJF4SDNRTyE-TuXrHfIqRjZB60zhWRJczFo2kpL7FCKwliE-vJ6djcSw__"
 
-## wget -O https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2020-A.tar.gz
+## wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
 
 ## tar -xzvf cellranger-7.2.0.tar.gz
 ## tar -xzvf refdata-gex-GRCh38-2020-A.tar.gz
@@ -106,30 +106,6 @@ if(params$isSlides == "yes"){
 ## cellranger count --id=my_run_name \
 ##    --fastqs=PATH_TO_FASTQ_DIRECTORY \
 ##    --transcriptome=/PATH_TO_CELLRANGER_DIRECTORY/refdata-gex-GRCh38-2020-A
-
-## cellranger mkgtf Homo_sapiens.GRCh38.ensembl.gtf \
-## Homo_sapiens.GRCh38.ensembl.filtered.gtf \
-##                    --attribute=gene_biotype:protein_coding \
-##                    --attribute=gene_biotype:lncRNA \
-##                    --attribute=gene_biotype:antisense \
-##                    --attribute=gene_biotype:IG_LV_gene \
-##                    --attribute=gene_biotype:IG_V_gene \
-##                    --attribute=gene_biotype:IG_V_pseudogene \
-##                    --attribute=gene_biotype:IG_D_gene \
-##                    --attribute=gene_biotype:IG_J_gene \
-##                    --attribute=gene_biotype:IG_J_pseudogene \
-##                    --attribute=gene_biotype:IG_C_gene \
-##                    --attribute=gene_biotype:IG_C_pseudogene \
-##                    --attribute=gene_biotype:TR_V_gene \
-##                    --attribute=gene_biotype:TR_V_pseudogene \
-##                    --attribute=gene_biotype:TR_D_gene \
-##                    --attribute=gene_biotype:TR_J_gene \
-##                    --attribute=gene_biotype:TR_J_pseudogene \
-##                    --attribute=gene_biotype:TR_C_gene
-
-## cellranger mkref --genome=custom_reference \
-## --fasta=custom_reference.fa  \
-## --genes=custom_reference_filtered.gtf
 
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
