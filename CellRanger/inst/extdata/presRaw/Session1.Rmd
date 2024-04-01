@@ -1,9 +1,9 @@
 ---
 title: "Cell Ranger"
-subtitle: "Bioinformatics Resource Center - Rockefeller University"
+subtitle: "Bioinformatics Resource Center, Rockefeller University"
 author: 
-  - "http://rockefelleruniversity.github.io/Intro_To_R_1Day/"
-  - "brc@rockefeller.edu"
+  - ".link[[Course Website](https://rockefelleruniversity.github.io/CellRanger/)]"
+  - ".link[brc@rockefeller.edu]"
 output: 
   xaringan::moon_reader:
     css: xaringan-themer.css
@@ -27,10 +27,11 @@ suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
 ```
 
-```{r xaringan-themer, include=FALSE, warning=FALSE}
+```{r xaringan-themer, include=FALSE, warning=FALSE, eval=FALSE}
 library(xaringanthemer)
 style_mono_accent(
   base_color = "#23373B",
+  title_slide_text_color="white",
   header_font_google = google_font("Montserrat"),
   text_font_google   = google_font("Fira Sans", "300", "300i"),
   code_font_google   = google_font("Fira Code")
@@ -51,10 +52,10 @@ if(params$isSlides != "yes"){
 
 ## Overview
 
-- [Course Home Page](http://rockefelleruniversity.github.io/CellRanger/)
-- [Background to R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#background-to-r)
-- [Data types in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#data_types_in_r)
-- [Reading and writing in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#reading-and-writing-data-in-r)
+- .link[[Course Home Page](http://rockefelleruniversity.github.io/CellRanger/)]
+- .link[[Background to R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#background-to-r)]
+- .link[[Data types in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#data_types_in_r)]
+- .link[[Reading and writing in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#reading-and-writing-data-in-r)]
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -83,11 +84,11 @@ if(params$isSlides == "yes"){
 
 Links to material and slides for this course can be found on github.
 
-* [Cell Ranger](https://rockefelleruniversity.github.io/CellRanger/)
+* .link[[Cell Ranger](https://rockefelleruniversity.github.io/CellRanger/)]
 
 Or can be downloaded as a zip archive from here.
 
-* [Download zip](https://github.com/rockefelleruniversity/CellRanger/zipball/master)
+* .link[[Download zip](https://github.com/rockefelleruniversity/CellRanger/zipball/master)]
 
 ---
 ## Course materials
@@ -126,7 +127,7 @@ if(params$isSlides == "yes"){
 ---
 ## A more advanced scRNAseq workflow
 
-![overview](./imgs/scRNA_workflow_ver001_20231017.png)
+![overview](./imgs/advancedworkflow.png)
 
 ---
 ## A more advanced scRNAseq workflow
@@ -161,11 +162,9 @@ if(params$isSlides == "yes"){
 ## Cell Ranger
 
 .pull-left[
-Cell Ranger is a suite of tools for single cell processing and analysis available from 10X Genomics. It performs key processing steps i.e. mapping, and is the first chance to delve into your datasets QC. 
+Cell Ranger is a suite of tools for single cell processing and analysis available from 10X Genomics. It performs key processing steps i.e. mapping, and is the first chance to delve into your data sets QC. 
 
-In this session we will give a brief overview or running this
-
-Then dive deeper into interpreting outputs,
+In this session we will give a brief overview of running this tool and then dive deeper into interpreting the outputs.
 ]
 .pull-right[
 ![](./imgs/CellRangerPage.png)
@@ -176,9 +175,9 @@ Then dive deeper into interpreting outputs,
 
 - Often genomics centers will run it for you (i.e. here at Rockefeller)
 
-- Why run Cell Ranger:
-  * You want to integrate datasets, but they were processed by different versions of Cell Ranger
-  * You want to change Cell Ranger parameters i.e. export BAMs, or force an expected cell number.
+- Why run Cell Ranger yourself?:
+  * You want to integrate data sets, but they were processed by different versions of Cell Ranger
+  * You may want to change Cell Ranger parameters i.e. export BAMs, or force an expected cell number.
   * Most commonly you want to reanalyze a published data set
 
 ---
@@ -186,7 +185,7 @@ Then dive deeper into interpreting outputs,
 
 .pull-left[
 
-- Cell Ranger is available from the [10x genomics website](https://support.10xgenomics.com/single-cell-gene-expression/software/downloads/latest).
+- Cell Ranger is available from the .link[[10x genomics website](https://support.10xgenomics.com/single-cell-gene-expression/software/downloads/latest)].
 
 - Also available are pre-baked references for Human and Mouse genomes (GRCh37/38 and GRCm37)
 
@@ -207,7 +206,7 @@ Then dive deeper into interpreting outputs,
 wget -O cellranger-8.0.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-8.0.0.tar.gz?Expires=1711772964&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=muvzcbqxba6d-blyYS02MVfLlzwZk6iZNQWXdaoCLnl7owW2nEN-IHwSPwdNoYl-6Xia7rr0S1sLCUQTsekGm2pQKcd0kqK~ndHK0DM7SwSVpXLlRvBV5pXt~EIlsxATVBKVeQLnUy698N-WnRlT~ahjlU-nMdpomX9-lOkF~w8gbgHBdtPXunTWfW87sSJLpHMDVENSF7TFJsXERDwDnsXyQLCuEhfGTCOnupkaATlLEr9kaeCStePKkwGyqgi1m8Ua02NNGHWPIJ6I1mDt695wo~dgptpJF4SDNRTyE-TuXrHfIqRjZB60zhWRJczFo2kpL7FCKwliE-vJ6djcSw__"
 ```
 
-Download reference for Human genome (GRCh38)
+Download reference genome for Cell Ranger i.e. Human genome (GRCh38)
 ```{shell, eval=FALSE}
 wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
 ```
@@ -221,14 +220,14 @@ wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
 Unpack software and references.
 
 ```{shell, eval=FALSE}
-tar -xzvf cellranger-7.2.0.tar.gz
+tar -xzvf cellranger-8.0.0.tar.gz
 tar -xzvf refdata-gex-GRCh38-2020-A.tar.gz
 ```
 
-- Finally we can add the cellranger directory to our PATH.
+- Finally we can add the Cell Ranger directory to our PATH.
 
 ```{shell, eval=FALSE}
-export PATH=/PATH_TO_CELLRANGER_DIRECTORY/cellranger-7.1.0:$PATH
+export PATH=/PATH_TO_CELLRANGER_DIRECTORY/cellranger-8.0.0:$PATH
 ```
 
 ---
@@ -238,7 +237,7 @@ Now we have the downloaded Cell Ranger software and required pre-build reference
 
 Typically FastQ files for your scRNA run will have been generated using the **Cell Ranger mkfastq** toolset to produce a directory a FastQ files. 
 
-We can now use CellRanger count command with our reference and fastQ files to generate our count matrix and associated files.
+We can now use Cell Ranger count command with our reference and fastQ files to generate our count matrix and associated files.
 
 If you are analyzing single nuclei RNA-seq data remember to set the **--include-introns** flag.
 
@@ -267,7 +266,7 @@ If you are working with a genome which is not Human and/or mouse you will need t
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Cell Ranger -  Output files
+# Output files
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -275,7 +274,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Cell Ranger - Output files
+  cat("# Output files
 
 ---
 "    
@@ -286,7 +285,7 @@ if(params$isSlides == "yes"){
 ```
 
 
-## Cell Ranger - Outputs
+## Outputs
 
 Having completed the Cell Ranger count step, the user will have created a folder named as set by the **--id** flag for the count command.
 
@@ -295,7 +294,7 @@ Within this folder will be the **outs/** directory containing all the outputs ge
 ![](./imgs/outputs.png)
 
 ---
-## Cell Ranger - Count Matrices 
+## Count Matrices 
 
 The count matrices to be used for further analysis are stored in both MEX and HDF5 formats within the output directories.
 
@@ -310,7 +309,7 @@ The filtered matrix only contains detected, cell-associated barcodes whereas the
 - raw_feature_bc_matrix.h5
 
 ---
-## Cell Ranger - BAM files 
+## BAM files 
 
 .pull-left[
 The outs directory may also contain a BAM file of alignments for all barcodes against the reference _(possorted_genome_bam.bam)_ as well as an associated BAI index file _(possorted_genome_bam.bam.bai)_. This is no longer a default output.
@@ -329,9 +328,9 @@ This BAM file is sometimes used in downstream analysis such as scSplit/Velocyto 
 
 
 ---
-## Cell Ranger - Cloupe files 
+## Cloupe files 
 
-Cell Ranger also outputs files for visualization within the (10X Loupe browser software)[https://www.10xgenomics.com/support/software/loupe-browser/latest] - _cloupe.cloupe_.
+Cell Ranger also outputs files for visualization within the .link[[10X Loupe browser software](https://www.10xgenomics.com/support/software/loupe-browser/latest)] - _cloupe.cloupe_.
 
 This allows for the visualization of scRNA-seq/snRNA-seq as a t-sne/umap with the ability to overlay metrics of QC and gene expression onto the cells in real time
 
@@ -340,12 +339,12 @@ This allows for the visualization of scRNA-seq/snRNA-seq as a t-sne/umap with th
 </div>
 
 ---
-## Cell Ranger - QC outputs
+## QC outputs
 
 Assessment of the overall quality of a scRNA-seq/snRNA-seq experiment after Cell Ranger can give our first chance to dig into the quality of your dataset and gain insight any issues we might face in data analysis.
 
 ---
-## Cell Ranger - Metrics and Web Summary
+## Metrics and Web Summary
 
 Cell Ranger will also output summaries of useful metrics as a text file _(metrics_summary.csv)_ and as a intuitive web-page.
 
@@ -372,7 +371,7 @@ There are many potential issues which can arise in scRNA-seq/snRNA-seq data incl
 
 .pull-right[
  <div align="center">
-<img src="imgs/bad_cells.png" alt="igv" height="300" width="200">
+<img src="imgs/bad_cells.png" alt="igv" height="450" width="300">
 </div>
 ]
 
@@ -382,7 +381,7 @@ There are many potential issues which can arise in scRNA-seq/snRNA-seq data incl
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Cell Ranger - Web Summary QC
+# Web Summary QC
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -390,7 +389,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Cell Ranger - Web Summary QC
+  cat("# Web Summary QC
 
 ---
 "    
@@ -406,7 +405,7 @@ if(params$isSlides == "yes"){
 .pull-left[
 The web summary html file contains an interactive report describing the most essential QC for your single cell experiment as well as initial clustering and dimension reduction for your data.
 
-The web summary also contains useful information on the input files and the versions used in this analysis for later reproducibility.
+The web summary also contains useful information on the input files and the versions used in this analysis for reproducibility.
 ]
 
 .pull-right[
@@ -418,7 +417,8 @@ The web summary also contains useful information on the input files and the vers
 
 .pull-left[
 The first thing we can review is the **Sample** information panel. **(Bottom Right)**
-As most people do not run CellRanger themselves this is important to check it matches expectation (often genomics cores will run it for you)
+As most people do not run Cell Ranger themselves this is important to check it matches expectations.
+
 - Sample ID - Sample name (Assigned in **cellranger count**).
 - Chemistry - The 10x chemistry used.
 - Include introns - Whether counting was run to include intron counts (typical for single neuron RNA-seq).
@@ -452,7 +452,6 @@ The **Sequencing** panel highlights information on the quality of the Illumina s
 
 ---
 ## Sequencing panel
-
 
 Key Metrics we look for:
 
@@ -569,8 +568,6 @@ It is important to know what version and parameters were used to run Cell Ranger
 ---
 ## Knee plot
 
-.pull-left[
-
 The Knee plot also acts a good QC tools to investigate differing types of single cell failure.
 
 Whereas our previous knee plot represented a good sample, differing knee plot patterns can be indicative of specific problems with the single cell protocol. We will show you some examples of these below from real data.
@@ -578,9 +575,10 @@ Whereas our previous knee plot represented a good sample, differing knee plot pa
 ---
 ## Knee plot
 
+.pull-left[
 In this example we see no specific cliff and knee suggesting a failure in the integration of oil, beads and samples (wetting failure) or a compromised sample.
-
 ]
+
 .pull-right[
 ![](./imgs/wetfailure.png)
 ]
