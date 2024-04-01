@@ -54,7 +54,7 @@
   --inverse-header-color: #FFFFFF;
   --inverse-link-color: #23373B;
   --title-slide-background-color: #23373B;
-  --title-slide-text-color: #FFFFFF;
+  --title-slide-text-color: white;
   --header-background-color: #23373B;
   --header-background-text-color: #FFFFFF;
   --base: #23373B;
@@ -290,5 +290,21 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
 }
 .bg-black {
   background-color: var(--black);
+}
+
+.title-slide h1 {
+  font-size: 80px;
+}
+
+
+.title-slide h3 {
+  color: #EB811B;
+  font-size: 30px;
+}
+
+.link a {
+  color: #EB811B;
+  text-decoration: underline;
+  font-size: 30px;
 }
 
