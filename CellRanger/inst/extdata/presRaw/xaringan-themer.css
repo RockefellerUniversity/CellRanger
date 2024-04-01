@@ -302,9 +302,15 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   font-size: 30px;
 }
 
-.link a {
+.link-title a {
   color: #EB811B;
   text-decoration: underline;
   font-size: 30px;
 }
+
+.link a {
+  color: #EB811B;
+  text-decoration: underline;
+}
+
 

@@ -2,8 +2,8 @@
 title: "Cell Ranger"
 subtitle: "Bioinformatics Resource Center, Rockefeller University"
 author: 
-  - ".link[[Course Website](https://rockefelleruniversity.github.io/CellRanger/)]"
-  - ".link[brc@rockefeller.edu]"
+  - ".link-title[[Course Website](https://rockefelleruniversity.github.io/CellRanger/)]"
+  - ".link-title[brc@rockefeller.edu]"
 output: 
   xaringan::moon_reader:
     css: xaringan-themer.css
@@ -53,9 +53,9 @@ if(params$isSlides != "yes"){
 ## Overview
 
 - .link[[Course Home Page](http://rockefelleruniversity.github.io/CellRanger/)]
-- .link[[Background to R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#background-to-r)]
-- .link[[Data types in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#data_types_in_r)]
-- .link[[Reading and writing in R](https://rockefelleruniversity.github.io/Intro_To_R_1Day/r_course/presentations/singlepage/introToR_Session1.html#reading-and-writing-data-in-r)]
+- .link[[Running Cell Ranger](https://rockefelleruniversity.github.io/CellRanger/r_course/presentations/singlepage/Session1.html#Cell-Ranger)]
+- .link[[Output Files](https://rockefelleruniversity.github.io/CellRanger/r_course/presentations/singlepage/Session1.html#Output-files)]
+- .link[[Web Summary](https://rockefelleruniversity.github.io/CellRanger/r_course/presentations/singlepage/Session1.html#Web-Summary-QC)]
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -124,17 +124,12 @@ if(params$isSlides == "yes"){
 
 ```
 
----
-## A more advanced scRNAseq workflow
 
-![overview](./imgs/advancedworkflow.png)
-
----
-## A more advanced scRNAseq workflow
-
-Full image here of workflow is here: [overview](./imgs/scRNA_workflow_ver001_20231017.png)
+## A scRNAseq workflow
 
 scRNAseq is a very variable process and each dataset has unique QC problems. Though a simple workflow often works, we often need many more tools in our toolbox to handle more complex data sets. Deciding what is appropriate often depends on the data set and its QC metrics. 
+
+![overview](./imgs/advancedworkflow.png)
 
 ---
 ```{r, results='asis',include=TRUE,echo=FALSE}
@@ -335,45 +330,8 @@ Cell Ranger also outputs files for visualization within the .link[[10X Loupe bro
 This allows for the visualization of scRNA-seq/snRNA-seq as a t-sne/umap with the ability to overlay metrics of QC and gene expression onto the cells in real time
 
  <div align="center">
-<img src="imgs/cloupe.png" alt="igv" height="400" width="450">
+<img src="imgs/cloupe.png" alt="igv" height="350" width="400">
 </div>
-
----
-## QC outputs
-
-Assessment of the overall quality of a scRNA-seq/snRNA-seq experiment after Cell Ranger can give our first chance to dig into the quality of your dataset and gain insight any issues we might face in data analysis.
-
----
-## Metrics and Web Summary
-
-Cell Ranger will also output summaries of useful metrics as a text file _(metrics_summary.csv)_ and as a intuitive web-page.
-
-Metrics include
-
-- Counts/UMIs per cell.
-- Number of cells detected.
-- Alignment quality.
-- Distribution of reads in genomic features.
-- Sequencing saturation
-- t-sne/UMAP with default clustering.
-
----
-## QC is essential
-
-.pull-left[
-There are many potential issues which can arise in scRNA-seq/snRNA-seq data including -
-
-- Empty droplets
-- Low quality cells (dead or dying)
-- Ambient RNA contamination
-- Doublets
-]
-
-.pull-right[
- <div align="center">
-<img src="imgs/bad_cells.png" alt="igv" height="450" width="300">
-</div>
-]
 
 ---
 
@@ -398,6 +356,49 @@ if(params$isSlides == "yes"){
 }
 
 ```
+
+
+## QC outputs
+
+Assessment of the overall quality of a scRNA-seq/snRNA-seq experiment after Cell Ranger can give our first chance to dig into the quality of your dataset and gain insight any issues we might face in data analysis.
+
+---
+
+## QC is essential
+
+.pull-left[
+There are many potential issues which can arise in scRNA-seq/snRNA-seq data including -
+
+- Empty droplets
+- Low quality cells (dead or dying)
+- Ambient RNA contamination
+- Doublets
+]
+
+.pull-right[
+ <div align="center">
+<img src="imgs/bad_cells.png" alt="igv" height="460" width="310">
+<caption>Huemos et al. (2023)</caption>
+</div>
+]
+
+---
+## Metrics and Web Summary
+
+Cell Ranger will also output summaries of useful metrics as a text file _(metrics_summary.csv)_ and as a intuitive web-page.
+
+Metrics include
+
+- Counts/UMIs per cell.
+- Number of cells detected.
+- Alignment quality.
+- Distribution of reads in genomic features.
+- Sequencing saturation
+- t-sne/UMAP with default clustering.
+
+
+
+---
 
 
 ## Web Summary overview
@@ -455,13 +456,13 @@ The **Sequencing** panel highlights information on the quality of the Illumina s
 
 Key Metrics we look for:
 
-	* Q30 Bases in RNA Read > 65% (usually > 80%)
+  * **Q30 Bases in RNA Read > 65% (usually > 80%)**
 		+ Reflects the sequencing quality
 		+ Need to check with sequencing service supplier
-
-	* Sequencing Saturation > 40% (usually range 20% ~ 80%)
+		
+	* **Sequencing Saturation > 40% (usually range 20% ~ 80%)**
 		+ Reflects the complexity of libraries
-		+ Consider reconstructing library if too low 
+		+ Consider reconstructing library if too low
 
 ---
 ## Mapping panel
@@ -484,11 +485,11 @@ The **Mapping** panel highlights information on the mapping of reads to the refe
 
 Key Metrics we look for:
 
-  * Mapped to Genome > 60% (usually range 50% ~ 90%)
+  * **Mapped to Genome > 60% (usually range 50% ~ 90%)**
 		+ Mapping rate to reference genome
 		+ Check reference genome version if too low
 
-	* Reads Mapped Confidently to Transcriptome > 30% (usually > 60%)
+	* **Reads Mapped Confidently to Transcriptome > 30% (usually > 60%)**
 		+ Reflection of annotation to transcriptome
 		+ Check annotation if too low
 
@@ -515,12 +516,12 @@ The **Cells** panel highlights some of the most important information in the rep
 
 Key Metrics we look for:
 
-  * Fraction Reads in Cells > 70% (usually > 85%): 
+  * **Fraction Reads in Cells > 70% (usually > 85%)**
 		+ Reflects the ambient RNA contamination
 		+ Consider correcting for ambient RNA if < 90%
 
-  * Median reads per cell > 20,000/cell and estimated number of cells 500 ~ 10,000
-		+ May be caused by the failure of cell identification if the values were not in normal range
+  * **Median reads per cell > 20,000/cell and estimated number of cells 500 - 10,000**
+	  + May be caused by the failure of cell identification if the values were not in normal range
 		+ Need to check knee plot and re-evaluate cell number
 
 ---
@@ -551,19 +552,24 @@ The knee plot shows:-
 
 It is apparent that barcodes labelled blue (cell-associated barcodes) do not have a cut-off just based on the UMI count.
 
-In the latest version of Cell Ranger a two step process is used to define cell-associated barcodes based on the EmptyDrops method (Lun et al.,2019).
+In the newer versions of Cell Ranger a two step process is used to define cell-associated barcodes based on the EmptyDrops method (Lun et al.,2019).
 
 - First high RNA containing cells are identified based on a UMI cut-off.
 - Second, low UMI containing cells are used as a background training set to identify additional cell-associated barcodes not called in first step.
 
 If required, a **--force-cells** flag can be used with _cellranger count_ to identify a set number of cell-associated barcodes.
 
-It is important to know what version and parameters were used to run Cell Ranger. This cell calling step is continually updated and it can have a dramatic affect on your results. (Cell Ranger V4.0 just dropped last month and theres again been a hange in default paramteres)
+
 
 ]
 .pull-right[
 ![](./imgs/websum6.png)
 ]
+
+---
+## Knee plot
+
+It is important to know what version and parameters were used to run Cell Ranger. This cell calling step is continually updated and it can have a dramatic affect on your results. (Cell Ranger V4.0 just dropped last month and there's been a change in default parameters).
 
 ---
 ## Knee plot
@@ -673,7 +679,8 @@ Could show examples of high MT specifics of non-specific clustering or MT cluste
 ---
 ## Next steps
 
-Maybe lucky there's no QC issues. Often at this step we wouldn't make any decisions unless there is a clear complete failure. But important first step in setting expectations/preparing for what you may need to do for the dataset. QC and custom reads ins. Dealing with issues. 
+Fingers crossed there's no QC issues. 
 
+Often at this step we wouldn't make any decisions unless there is a clear complete failure. This is an important first step in setting expectations/preparing for what you may need to do for the dataset.
 
 
