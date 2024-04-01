@@ -6,14 +6,15 @@ suppressPackageStartupMessages(require(knitr))
 knitr::opts_chunk$set(echo = TRUE, tidy = T)
 
 
-## ----xaringan-themer, include=FALSE, warning=FALSE----------------------------
-library(xaringanthemer)
-style_mono_accent(
-  base_color = "#23373B",
-  header_font_google = google_font("Montserrat"),
-  text_font_google   = google_font("Fira Sans", "300", "300i"),
-  code_font_google   = google_font("Fira Code")
-)
+## ----xaringan-themer, include=FALSE, warning=FALSE, eval=FALSE----------------
+## library(xaringanthemer)
+## style_mono_accent(
+##   base_color = "#23373B",
+##   title_slide_text_color="white",
+##   header_font_google = google_font("Montserrat"),
+##   text_font_google   = google_font("Fira Sans", "300", "300i"),
+##   code_font_google   = google_font("Fira Code")
+## )
 
 
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
@@ -98,10 +99,10 @@ if(params$isSlides == "yes"){
 
 ## wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
 
-## tar -xzvf cellranger-7.2.0.tar.gz
+## tar -xzvf cellranger-8.0.0.tar.gz
 ## tar -xzvf refdata-gex-GRCh38-2020-A.tar.gz
 
-## export PATH=/PATH_TO_CELLRANGER_DIRECTORY/cellranger-7.1.0:$PATH
+## export PATH=/PATH_TO_CELLRANGER_DIRECTORY/cellranger-8.0.0:$PATH
 
 ## cellranger count --id=my_run_name \
 ##    --fastqs=PATH_TO_FASTQ_DIRECTORY \
@@ -111,7 +112,7 @@ if(params$isSlides == "yes"){
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Cell Ranger -  Output files
+# Output files
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -119,7 +120,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Cell Ranger - Output files
+  cat("# Output files
 
 ---
 "    
@@ -133,7 +134,7 @@ if(params$isSlides == "yes"){
 if(params$isSlides == "yes"){
   cat("class: inverse, center, middle
 
-# Cell Ranger - Web Summary QC
+# Web Summary QC
 
 <html><div style='float:left'></div><hr color='#EB811B' size=1px width=720px></html> 
 
@@ -141,7 +142,7 @@ if(params$isSlides == "yes"){
 "    
   )
 }else{
-  cat("# Cell Ranger - Web Summary QC
+  cat("# Web Summary QC
 
 ---
 "    
