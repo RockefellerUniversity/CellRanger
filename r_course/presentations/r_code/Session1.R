@@ -107,6 +107,7 @@ if(params$isSlides == "yes"){
 ## cellranger count --id=my_run_name \
 ##    --fastqs=PATH_TO_FASTQ_DIRECTORY \
 ##    --transcriptome=/PATH_TO_CELLRANGER_DIRECTORY/refdata-gex-GRCh38-2020-A
+##    --create-bam=true
 
 ## ----results='asis',include=TRUE,echo=FALSE-----------------------------------
 if(params$isSlides == "yes"){
