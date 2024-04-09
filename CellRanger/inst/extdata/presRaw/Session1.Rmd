@@ -160,10 +160,10 @@ if(params$isSlides == "yes"){
 Cell Ranger is a suite of tools for single cell processing and analysis available from 10X Genomics. It performs key processing steps i.e. demultiplexing, conversion to FASTQ and mapping. It is also the first chance to delve into your data sets QC. 
 
 In this session we will give a brief overview of running this tool and then dive deeper into interpreting the outputs.
-]
+  ]
 .pull-right[
 ![](./imgs/CellRangerPage.png)
-]
+  ]
 
 ---
 ## Do I need to run this?
@@ -184,9 +184,10 @@ In this session we will give a brief overview of running this tool and then dive
 
 - Also available are pre-baked references for Human and Mouse genomes (GRCh37/38 and GRCm37)
 
-]
+  ]
+  
 .pull-right[![](./imgs/CellRangerDownload.png)
-]
+  ]
 
 ---
 ## Cell Ranger
@@ -302,7 +303,8 @@ The filtered matrix only contains detected, cell-associated barcodes whereas the
 The outs directory may also contain a BAM file of alignments for all barcodes against the reference _(possorted_genome_bam.bam)_ as well as an associated BAI index file _(possorted_genome_bam.bam.bai)_. This depends on whether you put true or false in the *--create-bam argument*. Older versions of Cell Ranger did not have this argument and would default to producing this BAM file. 
 
 This BAM file is sometimes used in downstream analysis such as scSplit/Velocyto as well as for the generation of signal graphs such as bigWigs.
-]
+  ]
+  
 .pull-right[
  <div align="center">
 <img src="imgs/sam1.png" alt="igv" height="200" width="100">
@@ -311,7 +313,7 @@ This BAM file is sometimes used in downstream analysis such as scSplit/Velocyto 
 <img src="imgs/sam2.png" alt="igv" height="150" width="450">
 </div>
 
-]
+  ]
 
 
 ---
@@ -421,11 +423,11 @@ As most people do not run Cell Ranger themselves this is important to check it m
 - Include introns - Whether counting was run to include intronic counts (typical for single nucleus RNAseq, but also useful for scRNAseq)
 - Pipeline Version - Version of Cell Ranger used
 
-]
+  ]
 
 .pull-right[
 ![](./imgs/websum4.png)
-]
+  ]
 
 ---
 ## Command Line Arguments
@@ -452,11 +454,11 @@ The **Sequencing** panel highlights information on the quality of the Illumina s
 - Sequencing saturation - Unique valid barcode/UMI versus all valid barcode/UMI
 - Q30 scores - Assessment of sequencing qualities for barcode/UMI/RNA Reads
 
-]
+  ]
 
 .pull-right[
 ![](./imgs/websum2.png)
-]
+  ]
 
 ---
 ## Sequencing panel
@@ -482,11 +484,11 @@ The **Mapping** panel highlights information on the mapping of reads to the refe
 - Reads Mapped Confidently to Exonic/Intronic/Intergenic - Uniquely mapped reads to specific regions
 - Reads Mapped Confidently to Transcriptome - Reads mapped to a unique gene (and consistent with slice junctions)
 - Reads Mapped Antisense to Gene - Reads mapped to the opposite strand of a gene
-]
+  ]
 
 .pull-right[
 ![](./imgs/websum3.png)
-]
+  ]
 
 ---
 ## Mapping panel
@@ -511,10 +513,10 @@ The **Cells** panel highlights some of the most important information in the rep
 - Mean Reads per cell -  Average reads in each cell
 - Median Genes per Cell - Median number of genes detected (at least 1 count) per cell associated barcodes
 
-]
+  ]
 .pull-right[
 ![](./imgs/websum6.png)
-]
+  ]
 
 ---
 ## Cells panel 
@@ -613,10 +615,10 @@ If there is a clog in the machine we may see a knee plot where the overall numbe
 
 
 
-]
+  ]
 .pull-right[
 ![](./imgs/lowbarcode.png)
-]
+  ]
 
 ---
 ## Knee plot
@@ -630,10 +632,10 @@ This could be indicative of a heterogenous sample where we have two populations 
 Knee plots should be interpreted in the context of the biology under investigation.
 
 
-]
+  ]
 .pull-right[
 ![](./imgs/hetero.png)
-]
+  ]
 
 
 ---
@@ -669,11 +671,11 @@ The t-SNE plot shows the distribution and similarity within your data.
 - Expected separation between and structure across clusters may be observed within the t-SNE plot.
 - Identify expected clusters based on expression of marker genes
 
-]
+  ]
 
 .pull-right[
 ![](./imgs/anal2.png)
-]
+  ]
 
 ---
 ## Sequence and Gene saturation
@@ -683,7 +685,7 @@ The sequence saturation and Median genes per cell plots show these calculations 
 
 By reviewing the curve of the down sampled metrics we can assess whether we are approaching saturation for either of these metrics.
 
-]
+  ]
 
 .pull-right[
  <div align="center">
@@ -692,7 +694,7 @@ By reviewing the curve of the down sampled metrics we can assess whether we are 
  <div align="center">
 <img src="imgs/anal4.png" alt="igv" height="200" width="200">
 </div>
-]
+  ]
 
 
 ---
@@ -702,11 +704,11 @@ Early issues with QC can manifest in many ways downstream. This is from a publis
 
 .pull-left[
 ![](./imgs/contaminated_knee.png)
-]
+  ]
 
 .pull-right[
 ![](./imgs/marker_gene.png)
-]
+  ]
 
 ---
 ## Next steps
