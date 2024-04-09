@@ -83,7 +83,7 @@ class: inverse, center, middle
 
 ## A scRNAseq workflow
 
-scRNAseq is a very variable process and each dataset has unique QC problems. Though a simple workflow often works, we often need many more tools in our toolbox to handle more complex data sets. Deciding what is appropriate often depends on the data set and its QC metrics. 
+scRNAseq analysis is a very variable process and each data set has unique QC problems. We often need many tools across several computational languages to analyze these complex experiments. Deciding what is appropriate often depends on the data set and its QC metrics. Despite the variability in approaches, our first step is nearly always to run Cell Ranger.
 
 ![overview](./imgs/advancedworkflow.png)
 
@@ -99,7 +99,7 @@ class: inverse, center, middle
 ## Cell Ranger
 
 .pull-left[
-Cell Ranger is a suite of tools for single cell processing and analysis available from 10X Genomics. It performs key processing steps i.e. mapping, and is the first chance to delve into your data sets QC. 
+Cell Ranger is a suite of tools for single cell processing and analysis available from 10X Genomics. It performs key processing steps i.e. demultiplexing, conversion to FASTQ and mapping. It is also the first chance to delve into your data sets QC. 
 
 In this session we will give a brief overview of running this tool and then dive deeper into interpreting the outputs.
 ]
@@ -110,11 +110,11 @@ In this session we will give a brief overview of running this tool and then dive
 ---
 ## Do I need to run this?
 
-- Often genomics centers will run it for you (i.e. here at Rockefeller)
+- Often genomics centers will run it for you and deliver mtx/hdf5 files (i.e. here at Rockefeller)
 
 - Why run Cell Ranger yourself?:
   * You want to integrate data sets, but they were processed by different versions of Cell Ranger
-  * You may want to change Cell Ranger parameters i.e. export BAMs, or force an expected cell number.
+  * You may want to change Cell Ranger parameters i.e. export BAMs, or force an expected cell number
   * Most commonly you want to reanalyze a published data set
 
 ---
@@ -137,7 +137,7 @@ In this session we will give a brief overview of running this tool and then dive
 - Typically, due to memory requirements, users run Cell Ranger on a remote server and not their own machines.
 - To download Cell Ranger and the required reference on remote server, we typically use the *wget* command (these commands are all on the [Download](https://support.10xgenomics.com/single-cell-gene-expression/software/downloads/latest) page).
 
-[This will all be in terminal on the server you are using].
+[This will all be in terminal on the server you are using]
 
 
 ```shell
@@ -156,8 +156,6 @@ wget "https://cf.10xgenomics.com/supp/cell-exp/refdata-gex-GRCh38-2024-A.tar.gz"
 
 - Having downloaded the software and references, we can then unpack them.
 
-Unpack software and references.
-
 
 ```shell
 tar -xzvf cellranger-8.0.0.tar.gz
@@ -174,11 +172,9 @@ export PATH=/PATH_TO_CELLRANGER_DIRECTORY/cellranger-8.0.0:$PATH
 ---
 ## Running Cell Ranger count
 
-Now we have the downloaded Cell Ranger software and required pre-build reference for Human (GRCh38) we can start the generation of count data from scRNA-seq/snRNA-seq fastQ data.
+Typically you will have FASTQ files from your experiment (or downloaded from a repository like GEO). These are likely to have been generated using the **Cell Ranger mkfastq** toolset to produce a directory of FASTQ files. 
 
-Typically FastQ files for your scRNA run will have been generated using the **Cell Ranger mkfastq** toolset to produce a directory a FastQ files. 
-
-We can now use Cell Ranger count command with our reference and fastQ files to generate our count matrix and associated files.
+As we have the downloaded Cell Ranger software and required pre-build reference for Human (GRCh38) we can generate count data from scRNA-seq/snRNA-seq FASTQ data. This will make a count matrix and associated files.
 
 If you are analyzing single nuclei RNA-seq data remember to set the **--include-introns** flag.
 
@@ -187,20 +183,18 @@ If you are analyzing single nuclei RNA-seq data remember to set the **--include-
 cellranger count --id=my_run_name \
    --fastqs=PATH_TO_FASTQ_DIRECTORY \
    --transcriptome=/PATH_TO_CELLRANGER_DIRECTORY/refdata-gex-GRCh38-2020-A
+   --create-bam=true
 ```
 
 ---
 ## Working with custom genomes
 
-If you are working with a genome which is not Human and/or mouse you will need to find another source for your Cell Ranger reference.
+If you are working with a genome which is not Human and/or Mouse you will need to find another source for your Cell Ranger reference.
 
 - Luckily many references are pre-built by other consortiums.
 - We can build our own references using other tools in Cell Ranger using the *mkgtf* and *mkref* functions.
 - For this you just need a FASTA file (DNA sequence) and a GTF file (Gene Annotation) for your reference.
-
-- **Importantly for Cell Ranger Count, only features labelled as exon in your GTF (_column 3_) will be considered for counting signal in genes**
-- **Many genomes label mitochondrial genes with _CDS_ and not _exon_ so these must be updated**
-
+- We have a more in-depth guide on how to do this is our [scRNA-seq bootcamp](https://rockefelleruniversity.github.io/SingleCell_Bootcamp/).
 
 ---
 
@@ -240,7 +234,7 @@ The filtered matrix only contains detected, cell-associated barcodes whereas the
 ## BAM files 
 
 .pull-left[
-The outs directory may also contain a BAM file of alignments for all barcodes against the reference _(possorted_genome_bam.bam)_ as well as an associated BAI index file _(possorted_genome_bam.bam.bai)_. This is no longer a default output.
+The outs directory may also contain a BAM file of alignments for all barcodes against the reference _(possorted_genome_bam.bam)_ as well as an associated BAI index file _(possorted_genome_bam.bam.bai)_. This depends on whether you put true or false in the *--create-bam argument*. Older versions of Cell Ranger did not have this argument and would default to producing this BAM file. 
 
 This BAM file is sometimes used in downstream analysis such as scSplit/Velocyto as well as for the generation of signal graphs such as bigWigs.
 ]
@@ -308,17 +302,21 @@ Cell Ranger will also output summaries of useful metrics as a text file _(metric
 
 Metrics include
 
-- Counts/UMIs per cell.
-- Number of cells detected.
-- Alignment quality.
-- Distribution of reads in genomic features.
+- Counts/UMIs per cell
+- Number of cells detected
+- Alignment quality
+- Distribution of reads in genomic features
 - Sequencing saturation
-- t-sne/UMAP with default clustering.
-
+- t-sne/UMAP with default clustering
 
 
 ---
+## Web Summary Example
 
+We will be looking at the web summary generated from a PBMC dataset with ~1,000 cells from a healthy donor. The full experiment details can be found on the 10X website .link[[here](https://www.10xgenomics.com/datasets/1-k-pbm-cs-from-a-healthy-donor-v-3-chemistry-3-standard-3-0-0)] and you can get a copy of a web summary from Cell Ranger version 8 .link[here](./data/web_summary.html)].
+
+[NOTE: Older web summaries contain largely the same information, but slightly different layout]
+---
 
 ## Web Summary overview
 
@@ -330,20 +328,19 @@ The web summary also contains useful information on the input files and the vers
 
 .pull-right[
 ![](./imgs/websum1.png)
-]
+
 
 ---
-## Sample panel
+## Run Summary
 
 .pull-left[
-The first thing we can review is the **Sample** information panel. **(Bottom Right)**
+The first thing we can review is the **Run Summary** information panel. **(Top Left)**
 As most people do not run Cell Ranger themselves this is important to check it matches expectations.
 
-- Sample ID - Sample name (Assigned in **cellranger count**).
-- Chemistry - The 10x chemistry used.
-- Include introns - Whether counting was run to include intron counts (typical for single neuron RNA-seq).
-- Reference Path and Transcriptome - References used in analysis.
-- Pipeline Version - Version of Cell Ranger used.
+- Sample ID - Sample name (Assigned in **cellranger count**)
+- Chemistry - The 10x chemistry used
+- Include introns - Whether counting was run to include intron counts (typical for single neuron RNA-seq)
+- Pipeline Version - Version of Cell Ranger used
 
 ]
 
@@ -352,23 +349,35 @@ As most people do not run Cell Ranger themselves this is important to check it m
 ]
 
 ---
+## Command Line Arguments
+
+A corresponding section of the web summary is the Command Line Arguments used to run Cell Ranger. **(Bottom)**
+Again this is an important section to double-check to make sure everything was run correctly. 
+
+- Input Path - Path to the input fastq files
+- Reference Path and Transcriptome - References used in analysis
+
+
+![](./imgs/websum5.png)
+
+---
 ## Sequencing panel
 
 .pull-left[
 The **Sequencing** panel highlights information on the quality of the Illumina sequencing. **Top Right**.
 
-- Number of reads - Total number of paired reads in library.
-- Valid Barcodes - Proportion of barcodes matching barcodes in whitelist (~ 740 thousand).
-- Valid UMIs - Total number of UMIs that are not all one base and contain no unknown bases.
+- Number of reads - Total number of paired reads in library
+- Number of Short Reads Skipped - Reads that were filtered out for being too short
+- Valid Barcodes - Proportion of barcodes matching barcodes in whitelist (~ 740 thousand)
+- Valid UMIs - Total number of UMIs that are not all one base and contain no unknown bases
 - Sequencing saturation - Unique valid barcode/UMI versus all valid barcode/UMI
-- Q30 scores - Assessment of sequencing qualities for barcode/UMI/RNA Reads.
+- Q30 scores - Assessment of sequencing qualities for barcode/UMI/RNA Reads
 
 ]
 
 .pull-right[
 ![](./imgs/websum2.png)
 ]
-
 
 ---
 ## Sequencing panel
@@ -391,9 +400,9 @@ The **Mapping** panel highlights information on the mapping of reads to the refe
 
 - Reads Mapped to Genome - Total number of reads mapping to the genome
 - Reads Mapped Confidently to Genome - Reads mapping uniquely to the genome
-- Reads Mapped Confidently to Exonic/Intronic - Reads mapping uniquely to the exons or introns
-- Reads Mapped Confidently to Transcriptome - Reads mapping to a unique gene (and consistent with slice junctions).
-
+- Reads Mapped Confidently to Exonic/Intronic/Intergenic - Reads mapping uniquely to the exons, introns or intergenic regions
+- Reads Mapped Confidently to Transcriptome - Reads mapping to a unique gene (and consistent with slice junctions)
+- Reads Mapped Antisense to Gene - Reads mapping to the opposite strand of a gene
 ]
 .pull-right[
 ![](./imgs/websum3.png)
@@ -416,13 +425,14 @@ Key Metrics we look for:
 ## Cells panel
 
 .pull-left[
-The **Cells** panel highlights some of the most important information in the report: the total number of cells captured and the distribution of counts across cells and genes. **Top Right**
+The **Cells** panel highlights some of the most important information in the report: the total number of cells captured and the distribution of counts across cells and genes. **Top Right**. Their importance is highlighted as several metrics are rpeeated and placed as the headline of the report. 
 
 - Estimated Number of Cells - Total number of barcodes associated to at least one cell.
 - Fraction Reads in Cells - Fraction of reads from valid barcode, associated to a cell and mapped to transcriptome. 
+- Mean Reads per cell -  Average reads in each cell
 - Median Reads per Cell - Median number of transcriptome reads within cell associated barcodes
-- Median Genes per Cell - - Median number of genes detected (at least 1 count) per cell associated barcodes.
-
+- Median Genes per Cell - Median number of genes detected (at least 1 count) per cell associated barcodes
+- Total Genes Detected - Number of genes with at least 1 count
 
 ]
 .pull-right[
@@ -450,7 +460,7 @@ Key Metrics we look for:
 
 The Cell panel also includes an interactive knee plot.
 
-The knee plot shows:- 
+The knee plot shows:
 
 - On the x-axis, the barcodes ordered by the most frequent on the left to the least frequent on the right
 
@@ -471,24 +481,17 @@ The knee plot shows:-
 
 It is apparent that barcodes labelled blue (cell-associated barcodes) do not have a cut-off just based on the UMI count.
 
-In the newer versions of Cell Ranger a two step process is used to define cell-associated barcodes based on the EmptyDrops method (Lun et al.,2019).
+In newer versions of Cell Ranger a two step process is used to define cell-associated barcodes based on the EmptyDrops method (Lun et al.,2019).
 
 - First high RNA containing cells are identified based on a UMI cut-off.
 - Second, low UMI containing cells are used as a background training set to identify additional cell-associated barcodes not called in first step.
 
-If required, a **--force-cells** flag can be used with _cellranger count_ to identify a set number of cell-associated barcodes.
-
-
+If required, a **--force-cells** flag can be used with _cellranger count_ to identify a specific number of cell-associated barcodes.
 
 ]
 .pull-right[
 ![](./imgs/websum6.png)
 ]
-
----
-## Knee plot
-
-It is important to know what version and parameters were used to run Cell Ranger. This cell calling step is continually updated and it can have a dramatic affect on your results. (Cell Ranger V4.0 just dropped last month and there's been a change in default parameters).
 
 ---
 ## Knee plot
@@ -539,8 +542,19 @@ Knee plots should be interpreted in the context of the biology under investigati
 ![](./imgs/hetero.png)
 ]
 
+
 ---
-## Analysis page
+## Knee plot
+
+It is important to know what version and parameters were used to run Cell Ranger. 
+
+This cell calling step is continually updated and it can have a dramatic affect on your results. The .link[[Web Summary](https://cf.10xgenomics.com/samples/cell-exp/3.0.0/pbmc_1k_v3/pbmc_1k_v3_web_summary.html)] on 10X Genomics for this dataset is from Cell Ranger V3.0 if you want to compare. 
+
+Cell Ranger V8.0 was just released last month and there's been a change in default parameters.
+
+
+---
+## Gene Expression page
 
 .pull-left[
 The web-summary also contains an analysis page where default dimension reduction, clustering and differential expressions between clusters has been performed.
@@ -554,13 +568,13 @@ Additionally the analysis page contains information on sequencing saturation and
 ]
 
 ---
-## t-sne and clustering
+## t-SNE and clustering
 
 .pull-left[
-The t-sne plot shows the distribution and similarity within your data.
+The t-SNE plot shows the distribution and similarity within your data.
 
-- Review for high and low UMI cells driving t-sne structure and/or clustering.
-- Expected separation between and structure across clusters may be observed within the t-sne plot.
+- Review for high and low UMI cells driving t-SNE structure and/or clustering.
+- Expected separation between and structure across clusters may be observed within the t-SNE plot.
 - Identify expected clusters based on expression of marker genes
 
 ]
@@ -573,7 +587,7 @@ The t-sne plot shows the distribution and similarity within your data.
 ## Sequence and Gene saturation
 
 .pull-left[
-The sequence saturation and Median genes per cell plots show these calculations (as show on summary page) over successive downsampling of the data. 
+The sequence saturation and Median genes per cell plots show these calculations (as show on summary page) over successive down sampling of the data. 
 
 By reviewing the curve of the down sampled metrics we can assess whether we are approaching saturation for either of these metrics.
 
@@ -592,8 +606,15 @@ By reviewing the curve of the down sampled metrics we can assess whether we are 
 ---
 ## How this manifests going forward?
 
-Could show examples of high MT specifics of non-specific clustering or MT clustering. 
+Early issues with QC can manifest in many ways downstream.
 
+.pull-left[
+![](./imgs/contaminated_knee.png)
+]
+
+.pull-right[
+![](./imgs/marker_gene.png)
+]
 
 ---
 ## Next steps
@@ -602,7 +623,13 @@ Fingers crossed there's no QC issues.
 
 Often at this step we wouldn't make any decisions unless there is a clear complete failure. This is an important first step in setting expectations/preparing for what you may need to do for the dataset.
 
+---
 
+## Back to the scRNAseq workflow
+
+There are many tools both in R and python to dig further into QC and to tackle any analysis issues that arise. Many of these tools have pros and cons, but there is no one universal workflow for every dataset.
+
+![overview](./imgs/advancedworkflow.png)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
