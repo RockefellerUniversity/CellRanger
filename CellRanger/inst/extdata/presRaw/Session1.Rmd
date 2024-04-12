@@ -306,9 +306,11 @@ This BAM file is sometimes used in downstream analysis such as scSplit/Velocyto 
   ]
   
 .pull-right[
+
  <div align="center">
-<img src="imgs/sam1.png" alt="igv" height="200" width="100">
+<img src="imgs/sam1.png" alt="igv" height="150" width="400">
 </div>
+<br>
  <div align="center">
 <img src="imgs/sam2.png" alt="igv" height="150" width="450">
 </div>
