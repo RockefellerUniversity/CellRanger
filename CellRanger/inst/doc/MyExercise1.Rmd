@@ -18,6 +18,6 @@ message(toMessage)
 
 
 <p>&nbsp;</p>
-We have no specific exercises relating to Cell Ranger, beyon recommending that you try to run Cell Ranger. Once you have run Cell Ranger, you canreview the output web summary and import the results into Loupe Browser.
+We have no specific exercises relating to Cell Ranger, beyond recommending that you try to run Cell Ranger. Once you have run Cell Ranger, you can review the output web summary and import the results into Loupe Browser.
 
-If you have no data to run Cell Ranger on, you can download a [10X Genomics dataset](https://www.10xgenomics.com/datasets). All the public 10X datasets will also include data that they have already processed if you just want to review how the QC outputs can vary. 
+If you have no data to run Cell Ranger on, you can download a [10X Genomics dataset](https://www.10xgenomics.com/datasets). All the public 10X data sets have both raw and processed results. You can use this resource to review how the QC outputs can vary between versions and data sets. 
