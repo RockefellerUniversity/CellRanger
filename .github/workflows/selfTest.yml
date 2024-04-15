@@ -191,7 +191,8 @@ jobs:
         run: |
           require(compileCourses)
           compileCourses::compileSingleCourseMaterial(repo="RockefellerUniversity",subdir="CellRanger",branch="master")
-          rmarkdown::render(input = "CellRanger/inst/extdata/Descriptions/CourseOverview.Rmd", output_file = "README.md", output_format = "md_document")
+          render_overview <- system.file("extdata/Descriptions/CourseOverview.Rmd", package = "introToR")
+          rmarkdown::render(input = render_overview, output_file = "README.md", output_format = "md_document")
         shell: Rscript {0}
 
       - name: Move to docs
