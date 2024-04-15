@@ -191,6 +191,7 @@ jobs:
         run: |
           require(compileCourses)
           compileCourses::compileSingleCourseMaterial(repo="RockefellerUniversity",subdir="CellRanger",branch="master")
+          rmarkdown::render(input = "CellRanger/inst/extdata/Descriptions/CourseOverview.Rmd", output_file = "README.md", output_format = "md_document")
         shell: Rscript {0}
 
       - name: Move to docs
@@ -206,6 +207,7 @@ jobs:
           git config --global user.email "tc.infomatics@gmail.com"
           git config --global http.postBuffer 263112000
           git add docs/\* r_course/\*
+          git add README.md
           git commit -m 'Autobuild' 
           git push origin HEAD:refs/heads/master
       
