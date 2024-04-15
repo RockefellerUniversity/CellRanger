@@ -124,7 +124,13 @@ if(params$isSlides == "yes"){
 
 ```
 
+## Sample Prep
 
+There are several single cell sequencing technologies. The most common is from 10X Genomics.
+
+![overview](./imgs/drops.png)
+
+---
 ## A scRNAseq workflow
 
 We often need many tools across several computational languages to [analyze these complex experiments](https://rockefelleruniversity.github.io/SingleCell_Bootcamp/). Deciding what is appropriate often depends on the data set and its QC metrics. Our first step is nearly always to run Cell Ranger.
@@ -524,7 +530,7 @@ The **Cells** panel highlights some of the most important information in the rep
 ## Cells panel 
 
 .pull-left[
-The **Cells** panel highlights some of the most important information in the report: the total number of cells captured and the distribution of counts across cells and genes. **Top Right**.
+The **Cells** panel also has other metrics which help describe the depth and ambient RNA proportion. **Top Right**.
 
 - Median Reads per Cell - Median number of transcriptome reads within cell associated barcodes
 - Fraction Reads in Cells - Fraction of reads from valid barcode, associated to a cell and mapped to transcriptome
@@ -542,12 +548,12 @@ The **Cells** panel highlights some of the most important information in the rep
 Key Metrics we look for:
 
 **Fraction Reads in Cells > 70% (usually > 85%)**
-		+ Reflects the ambient RNA contamination
+    + Reflects the ambient RNA contamination
 		+ Consider correcting for ambient RNA if < 90%
 
 **Median reads per cell > 20,000/cell and estimated number of cells 500 - 10,000**
-	  + May be caused by the failure of cell identification if the values were not in normal range
-		+ Need to check knee plot and re-evaluate cell number
+    + May be caused by the failure of cell identification if the values were not in normal range
+    + Need to check knee plot and re-evaluate cell number
 
 ---
 ## The Knee plot
