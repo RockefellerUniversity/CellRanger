@@ -509,7 +509,7 @@ Key Metrics we look for:
 
 **Reads Mapped Confidently to Transcriptome > 30% (usually > 60%)**
 		+ Reflection of annotation to transcriptome
-		+ Check annotation if too low
+    + Check annotation if too low
 
 ---
 ## Cells panel 
@@ -548,12 +548,12 @@ The **Cells** panel also has other metrics which help describe the depth and amb
 Key Metrics we look for:
 
 **Fraction Reads in Cells > 70% (usually > 85%)**
-    + Reflects the ambient RNA contamination
-		+ Consider correcting for ambient RNA if < 90%
+  + Reflects the ambient RNA contamination
+	+ Consider correcting for ambient RNA if < 90%
 
 **Median reads per cell > 20,000/cell and estimated number of cells 500 - 10,000**
-    + May be caused by the failure of cell identification if the values were not in normal range
-    + Need to check knee plot and re-evaluate cell number
+  + May be caused by the failure of cell identification
+  + Need to check knee plot and re-evaluate cell number
 
 ---
 ## The Knee plot
