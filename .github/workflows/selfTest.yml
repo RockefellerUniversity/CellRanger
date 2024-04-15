@@ -191,7 +191,7 @@ jobs:
         run: |
           require(compileCourses)
           compileCourses::compileSingleCourseMaterial(repo="RockefellerUniversity",subdir="CellRanger",branch="master")
-          render_overview <- system.file("extdata/Descriptions/CourseOverview.Rmd", package = "introToR")
+          render_overview <- system.file("extdata/Descriptions/CourseOverview.Rmd", package = "CellRanger")
           rmarkdown::render(input = render_overview, output_file = "README.md", output_format = "md_document")
         shell: Rscript {0}
 
